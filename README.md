@@ -2,7 +2,38 @@
 
 > 浑天仪是中国古代观测天象的三维球仪。本项目借其名，以 three.js 在浏览器中重建一座"关系天球"：节点如星，关系如宿，旋转观测，万象尽收。
 
-基于 three.js 的 3D 关系演示系统，以西游记全景为样本，深挖事件脉络、推演进程走向、预测未来图景，让复杂关系立体可见。
+基于 three.js 的 3D 关系演示系统家族中的**空间 / 结构**视角：以西游记全景为样本，把节点按层级铺在天球环带上，旋转观测、总览全局。
+
+## 定位：空间 / 结构（看全局）
+
+本系统独立功能：
+
+- **天球环带布局**：按 天庭 / 人间 / 地府 / 西天 等层级分环带（仿赤道环 / 黄道环 / 子午环）。
+- **轨道旋转 + 缩放 LOD + 环带聚焦**。
+- **结构概览**：分类计数、密度热力、层级树。
+- **全景快照导出**。
+
+数据切面：`nodes` 的层级 / 分类 / 球面坐标。
+明确不做：因果链深挖（归 [因陀罗网](https://github.com/huntian2028/indranet)）、时间推演与预测（归 [推背图](https://github.com/huntian2028/tuibeitu)）。
+
+## 家族架构：薄核心 + 三独立应用
+
+三套系统各占一个正交维度，共用一个薄核心，功能互不重叠：
+
+| 系统 | 维度 | 定位 |
+|---|---|---|
+| **浑天仪 Huntianyi** | 空间 / 结构 | 看全局 |
+| [因陀罗网 IndraNet](https://github.com/huntian2028/indranet) | 关系 / 因果 | 看联系 |
+| [推背图 TuiBeitu](https://github.com/huntian2028/tuibeitu) | 时间 / 演进 | 看变化 |
+
+- **relation-core（薄核心，独立包）**：只含渲染 bootstrap（scene / camera / controls / 渲染循环 / 拾取）、数据 schema 与校验、数据加载器；**不含任何业务布局与功能**。
+- 依赖单向：app → core；app 之间不互相 import。
+- 统一数据 schema：`nodes`（结构）/ `edges`（关系）/ `events`（时间序列），各 app 只消费自己的切面。
+
+## 相关项目
+
+- [因陀罗网 IndraNet](https://github.com/huntian2028/indranet) — 关系 / 因果
+- [推背图 TuiBeitu](https://github.com/huntian2028/tuibeitu) — 时间 / 演进
 
 ## 许可证
 
